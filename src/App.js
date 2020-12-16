@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import CardList from './Weather/CardList';
+import Loading from './Loading/Loading';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       weather: [],
-      location:[]
+      location:[],
+      error:[]
     };
   }
   componentDidMount() {
@@ -19,17 +21,16 @@ class App extends Component {
             weather: result.forecast.forecastday[0].hour,
             location: result.location
           });
-        },
-        (error) => {
-          this.setState({
-            error
-          });
         }
-      )
+      ).catch(err=>{
+        this.setState({
+          error:err
+        });
+      })
   }
   render(){
     const { weather,location } = this.state;
-    return (
+    return !weather.length ? <Loading /> : (
       <div className="App">
         <CardList weather={weather} location={location} />
       </div>
