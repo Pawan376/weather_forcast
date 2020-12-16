@@ -11,7 +11,7 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    fetch('http://api.weatherapi.com/v1/forecast.json?key=95f16632360b44e79a6173255200712&q=Haldwani&days=1')
+    fetch('https://api.weatherapi.com/v1/forecast.json?key=95f16632360b44e79a6173255200712&q=Haldwani&days=1')
       .then(response=> response.json())
       .then(
         (result) => {
